@@ -1,0 +1,37 @@
+import java.util.*;
+
+class Main {
+  public static List<List<Integer>>generate_Permute(List<Integer>input){
+    if(input.size() == 0){
+      return new ArrayList<>();
+    }
+    List<List<Integer>> result = new ArrayList<>();
+    List<Integer> list = new ArrayList<>();
+    result.add(new ArrayList<>(list));
+    permute(input, list, result, 0);
+    return result;
+  }
+  //[1, 2, 3]
+  public static void permute(List<Integer>input, List<Integer>list, List<List<Integer>>result, int index){
+    if(index >= input.size()){
+      return;
+    }
+    
+    for(int i = index ; i < input.size(); i++){
+      list.add(input.get(i));
+      result.add(new ArrayList<>(list));
+      permute(input, list, result, i+1);
+      list.remove(input.get(i));
+    }
+
+  }
+  public static void main(String[] args) {
+    System.out.println("Hello world!");
+    List<Integer> input = new ArrayList<>();
+    input.add(1);
+    input.add(2);
+    input.add(3);
+    List<List<Integer>> arr = generate_Permute(input);
+    System.out.println(arr.toString());
+  }
+}
